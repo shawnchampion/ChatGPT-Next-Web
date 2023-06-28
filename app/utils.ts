@@ -98,13 +98,6 @@ export function useMobileScreen() {
   return width <= MOBILE_MAX_WIDTH;
 }
 
-export function isMobileScreen() {
-  if (typeof window === "undefined") {
-    return false;
-  }
-  return window.innerWidth <= MOBILE_MAX_WIDTH;
-}
-
 export function isFirefox() {
   return (
     typeof navigator !== "undefined" && /firefox/i.test(navigator.userAgent)
@@ -159,6 +152,7 @@ export function autoGrowTextArea(dom: HTMLTextAreaElement) {
   const width = getDomContentWidth(dom);
   measureDom.style.width = width + "px";
   measureDom.innerText = dom.value !== "" ? dom.value : "1";
+  measureDom.style.fontSize = dom.style.fontSize;
   const endWithEmptyLine = dom.value.endsWith("\n");
   const height = parseFloat(window.getComputedStyle(measureDom).height);
   const singleLineHeight = parseFloat(
